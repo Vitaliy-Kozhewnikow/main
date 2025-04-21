@@ -1,0 +1,15 @@
+  .item{
+    color: blueviolet;
+  }
+  .active{
+    color: red;
+  }
+  .passive{
+    color: gold;
+  }
+
+  .active img{
+    width: 100px;
+    height: 80px;
+    border-radius: 30px;
+  }

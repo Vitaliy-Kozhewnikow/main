@@ -1,0 +1,44 @@
+.header{
+    grid-area: h;
+    background-color: brown;
+  }
+  .header img{
+    width: 60px;
+    cursor: pointer;
+  }
+ .loginBlock{
+    padding-right: 40px;
+    float: right;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    
+ }
+ .block{  
+  min-width: 100px;
+  
+  border: 0;
+  border-radius: 15px;
+  background: #4676D7;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 15px;
+ }
+ .block:hover {
+  background: linear-gradient(132.05deg, #428E5F -17.38%, #112120 78.4%), #204434;
+}
+
+.block:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px #cbd6ee;
+}
+
+.imgAva { 
+  display: flex; 
+  justify-content: center; 
+  align-items: center
+}
+
+
+

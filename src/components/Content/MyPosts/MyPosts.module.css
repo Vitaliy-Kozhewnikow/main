@@ -1,0 +1,51 @@
+  .item{
+    color: blueviolet;
+    padding: 15px;
+  }
+  .active{
+    color: red;
+  }
+  .passive{
+    color: gold;
+  }
+
+  .item img{
+    width: 100px;
+  }
+
+  .btn {
+    width: 200px;
+    background-color: green;
+    padding: 15px 50px;
+    color: white;
+    border-radius: 6px;
+    transition: opacity 0.3s;
+    opacity: var(--opacity);
+    font-size: 16px;
+    &:hover{
+      --opacity: 0.7;
+    }
+    &:active {
+      --opacity: 0.9;
+    }
+  }
+
+  .parentcontainer {
+    display: flex;
+    justify-content: center; /* Горизонтальное центрирование */
+    align-items: center; /* Вертикальное центрирование */
+}
+
+.textarea { 
+  width: 60%; /* Ширина поля ввода */
+    max-width: 1250px; /* Максимальная ширина */
+    height: 300px; /* Высота поля ввода */
+    padding: 15px;
+    border-radius: 9px;
+    border: 2px solid #888;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    outline: none; /* Убираем стандартную обводку */
+    box-shadow: 5 5 0px rgba(175, 27, 27, 0.1); /* Добавляем легкую тень */
+}

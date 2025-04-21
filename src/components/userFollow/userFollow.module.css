@@ -1,0 +1,13 @@
+.img{
+    width: 175px;
+    height: 200px;
+    border-radius: 100px;
+}
+.text {
+    font-size: 16pt;
+    cursor: pointer;
+}
+
+.textSelected {
+    font-weight: bold;
+}

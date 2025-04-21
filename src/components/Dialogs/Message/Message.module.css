@@ -1,0 +1,41 @@
+.flex{
+        display: flex; /* Включаем flexbox */
+        justify-content: flex-start; /* По умолчанию все элементы выравниваются по левому краю */
+        flex-direction: row;
+        margin-bottom: 10px; /* Отступ между сообщениями */
+    
+}
+.img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 12px;
+        border: 2px solid #4CAF50; /* Граница вокруг аватара */
+        padding: 2px;
+}
+.message {
+    max-width: 60%; /* Ограничиваем максимальную ширину сообщений */
+    padding: 10px ;
+    border-radius: 30px; /* Закругленные углы для сообщений */
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word; /* Чтобы длинные слова не выходили за пределы */
+}
+
+.message.sentByMe {
+    display: flex;
+    background-color: #4CAF50; /* Цвет для сообщений, отправленных вами */
+    color: black;
+
+    align-items: center;
+    margin-left: auto; /* Сдвигаем сообщение вправо */
+}
+
+.message.received {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #f0f0f0; /* Цвет для полученных сообщений */
+    color: black;
+    align-items: center;
+    margin-right: auto; /* Сдвигаем сообщение влево */
+}

@@ -1,0 +1,116 @@
+.dialogs{
+    display: flex;
+    
+}
+
+.dialogsItem {
+    flex: 2;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    position: relative;
+}
+
+.dialogsItem::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 95.7vh;
+    width: 6px; /* Толщина линии */
+    background: linear-gradient(90deg, #4CAF50, #00FF00, #4CAF50); /* Градиент */
+    background-size: 200% 100%; /* Увеличиваем размер для эффекта движения */
+    animation: gradientMove 3s linear infinite; /* Анимация */
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+
+
+.dialogsItem .active{
+
+    color: red;
+    
+}
+.dialog a{
+    color: white;
+    text-decoration: none;
+    font-weight: normal;
+
+}
+
+
+.messages{
+    flex:10;
+    flex-direction: column;/* Распологает все элементы по вертикали*/
+    
+    padding: 10px;
+    
+}
+
+.area {
+    width: 60%; /* Ширина поля ввода */
+    max-width: 1250px; /* Максимальная ширина */
+    height: 300px; /* Высота поля ввода */
+    padding: 15px;
+    border-radius: 9px;
+    border: 2px solid #888;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    outline: none; /* Убираем стандартную обводку */
+    box-shadow: 5 5 0px rgba(175, 27, 27, 0.1); /* Добавляем легкую тень */
+}
+
+
+.textareaWrapper {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    justify-content: center; /* Центрируем поле ввода */
+    margin-top: auto;
+    padding: 10px;
+  }
+
+
+.btn {
+    width: 200px;
+    background-color: green;
+    padding: 15px 50px;
+    color: white;
+    border-radius: 6px;
+    transition: opacity 0.3s;
+    opacity: var(--opacity);
+    font-size: 16px;
+    &:hover{
+      --opacity: 0.7;
+    }
+    &:active {
+      --opacity: 0.9;
+    }
+  }
+
+
+  .message { 
+    margin-top: 150px;
+  }
+
+
+  .container_message { 
+    overflow-y: scroll;
+    
+    height: 1000px;
+    width: 2300px;
+  }
+

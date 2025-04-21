@@ -1,0 +1,10 @@
+
+  .item{
+    color: blueviolet;
+  }
+  .active{
+    color: red;
+  }
+  .passive{
+    color: gold;
+  }
