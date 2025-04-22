@@ -4,10 +4,10 @@ import './App.css';
 
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import Nav from './components/Nav/Nav';
-import Music from './components/Music/Music';
-import Setting from './components/Setting/Setting';
-import UserFollowContainer from './components/userFollow/UserFollowContainer';
-import ProfileContainer from './components/Content/ProfileContainer';
+const Music = lazy(() => import('./components/Music/Music'));
+const Setting = lazy(() => import('./components/Setting/Setting'));
+const UserFollowContainer = lazy(() => import('./components/userFollow/UserFollowContainer'));
+const ProfileContainer = lazy(() => import('./components/Content/ProfileContainer'));
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import { useEffect } from 'react';
