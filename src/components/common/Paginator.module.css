@@ -1,0 +1,20 @@
+.paginator {
+    display: flex;
+    padding: 5px;
+
+}
+
+
+.text {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 5px;
+
+}
+
+.textSelected {
+    font-weight: bold;
+}

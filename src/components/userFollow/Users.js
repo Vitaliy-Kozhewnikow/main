@@ -2,6 +2,8 @@ import React from 'react';
 import a from './userFollow.module.css';
 import userPhoto from '../../images/defaultAva.jpg'
 import { NavLink } from 'react-router-dom';
+import Pagindator from "../common/Pagindator";
+import Paginator from "../common/Pagindator";
 
 
 
@@ -9,23 +11,12 @@ import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
 
-    const pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
-
-    const pages = []
-
-    for (let i = 1; i <= pagesCount; i++) { pages.push(i) }
-
 
 
 
     return (<div>
         <div className={a.text}>
-            {pages.map(p => {
-                return <span className={props.currentPage === p && a.textSelected}
-                    onClick={(e) => props.onPageClick(p)}>{p}</span>
-            })}
-
-
+            <Paginator totalUserCount={props.totalUserCount} pageSize={props.pageSize} currentPage={props.currentPage} onPageClick={props.onPageClick} />
         </div>
         {
             props.users.map(u => <div key={u.id}>

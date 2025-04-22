@@ -1,23 +1,22 @@
 
 import { Route, Routes } from 'react-router-dom';
+import {lazy} from "react";
 import './App.css';
-
-import DialogsContainer from './components/Dialogs/DialogsContainer';
-import Nav from './components/Nav/Nav';
-const Music = lazy(() => import('./components/Music/Music'));
-const Setting = lazy(() => import('./components/Setting/Setting'));
-const UserFollowContainer = lazy(() => import('./components/userFollow/UserFollowContainer'));
-const ProfileContainer = lazy(() => import('./components/Content/ProfileContainer'));
 import HeaderContainer from './components/Header/HeaderContainer';
+import UserFollowContainer from "./components/userFollow/UserFollowContainer";
 import Login from './components/Login/Login';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { initializeApp } from './redux/appReducer';
 import Preloader from './components/Preloader/Preloader';
-import ErrorMessage from './components/Content/MyPosts/ErrorMessage';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
+import Nav from './components/Nav/Nav';
 
-
-
+//React.lazy()
+const Music = lazy(() => import('./components/Music/Music'));
+const Setting = lazy(() => import('./components/Setting/Setting'));
+const ProfileContainer = lazy(() => import('./components/Content/ProfileContainer'));
+const ErrorMessage = lazy(() => import('./components/Content/MyPosts/ErrorMessage'));
 
 
 
