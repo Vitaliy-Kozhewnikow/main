@@ -28,6 +28,8 @@ const App = (props) => {
     initialized: state.app.initialized, 
     error: state.app.error
   }))
+
+  const hi = "gggg"
     
    
   
