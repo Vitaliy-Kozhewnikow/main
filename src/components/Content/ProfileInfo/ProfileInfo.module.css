@@ -1,5 +1,13 @@
 .discript{
-padding: 15px;
+margin-bottom: 0px;
 
 }
-  
+.inputFile {
+    display: flex;
+    align-items: center;
+    width: 270px;
+    background-color: #ffffff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+}

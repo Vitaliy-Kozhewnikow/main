@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import Profile from './Content';
+import Profile from './Profile';
 import { connect } from 'react-redux';
-import { getProfileInfo, getStatus, updateStatus} from '../../redux/profileReducer';
+import { getProfileInfo, getStatus, updateStatus, savePhoto} from '../../redux/profileReducer';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AuthNavigate } from '../hoc/AuthNavigate';
 import { compose } from 'redux';
@@ -26,7 +26,13 @@ const ProfileContainer = (props) => {
         props.getStatus(profileId)
     }, [params.userId, navigate, props.ID])
     
-        return (<Profile {...props} profile={props.profile} status={props.status} updateStatus={props.updateStatus} />)
+        return (<Profile {...props}
+                         owner = {!params.userId}
+                         profile={props.profile}
+                         status={props.status}
+                         updateStatus={props.updateStatus}
+                         savePhoto={ props.savePhoto }
+        />)
     
 }
 
@@ -39,7 +45,7 @@ const mapStateToProps = (state) => ({
 
 
 export default compose(
-    connect ( mapStateToProps , {getProfileInfo, getStatus , updateStatus}), 
+    connect ( mapStateToProps , {savePhoto, getProfileInfo, getStatus , updateStatus}),
     AuthNavigate
     )(ProfileContainer)
 

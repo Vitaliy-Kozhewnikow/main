@@ -1,10 +1,11 @@
-import { getProfileApi, getStatus as fetchStatus, updateStatus as updateStatusAPI } from "../api/api"
+import {getProfileApi, getStatus as fetchStatus, savePhotoApi, updateStatus as updateStatusAPI} from "../api/api"
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const UPDATE_INFO_PROFILE = 'UPDATE-INFO-PROFILE'
 const SET_STATUS = 'SET-STATUS'
 const DELETE_POST = 'DELETE-POST'
+const SAVE_PHOTO = 'SAVE-PHOTO'
 
 const firstState = {
     postsData: [
@@ -54,7 +55,12 @@ const profileReducer = (state = firstState, action) => {
             }
         }
         case DELETE_POST: { 
-            return {...state, postsData: state.postsData.filter(p=> p.id != action.id)}
+            return {...state, postsData: state.postsData.filter(p=> p.id !== action.id)}
+        }
+
+        case SAVE_PHOTO: {
+            debugger
+            return {...state, info: {...state.info, photos: action.photos}}
         }
 
 
@@ -74,6 +80,9 @@ export const setProfile = (profile) => ({ type: UPDATE_INFO_PROFILE, info: profi
 export const setStatus = (status) => ({ type: SET_STATUS, status })
 
 export const deletePost = (id) => ({type: DELETE_POST, id})
+
+export const savePhotoAC = (photos) => ( {type:SAVE_PHOTO, photos})
+
 
 export default profileReducer;
 
@@ -136,7 +145,7 @@ export const savePhoto = (file) => {
             const response = await savePhotoApi(file);
 
             if (response.data.resultCode === 0 ) {
-                dispatch(savePhotoSucess(response.data.photos));
+                dispatch(savePhotoAC(response.data.photos));
             }
 
 
