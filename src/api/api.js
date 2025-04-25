@@ -74,4 +74,5 @@ export const savePhotoApi = async (photoFile) => {
             'content-type': 'multipart/form-data'
         }
     })
+    return response
 }

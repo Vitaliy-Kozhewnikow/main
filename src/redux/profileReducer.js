@@ -145,14 +145,14 @@ export const savePhoto = (file) => {
             const response = await savePhotoApi(file);
 
             if (response.data.resultCode === 0 ) {
-                dispatch(savePhotoAC(response.data.photos));
+                dispatch(savePhotoAC(response.data.data.photos));
             }
 
 
 
         }
         catch (error) {
-            console.error('Ошибка при получении статуса: ',  error)
+            console.error('Ошибка при загрузки изображения: ',  error)
         }
     }
 }

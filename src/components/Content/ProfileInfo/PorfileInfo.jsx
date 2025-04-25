@@ -12,8 +12,8 @@ const ProfileInfo = React.memo(props => {
   }
 
   const onMainPhotoSelected = (e) => {
-      if (e.target.file[0].length) {
-          props.savePhoto(e.target.file[0]);
+      if (e.target.files) {
+          props.savePhoto(e.target.files[0]);
       }
   }
 
@@ -21,6 +21,7 @@ const ProfileInfo = React.memo(props => {
   return (
     <div>
       <div>
+
         <img src={props.profile.photos.large || userPhoto}></img>
       </div>
       <div className={a.discript}>
