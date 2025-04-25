@@ -129,6 +129,25 @@ export const updateStatus = (newStatus) => {
   }
 }
 
+export const savePhoto = (file) => {
+
+    return async (dispatch) => {
+        try {
+            const response = await savePhotoApi(file);
+
+            if (response.data.resultCode === 0 ) {
+                dispatch(savePhotoSucess(response.data.photos));
+            }
+
+
+
+        }
+        catch (error) {
+            console.error('Ошибка при получении статуса: ',  error)
+        }
+    }
+}
+
 
 
 
