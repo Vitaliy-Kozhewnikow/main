@@ -38,7 +38,7 @@ const ProfileInfo = React.memo(props => {
         <div>VK: {props.profile.contacts.vk}</div>
         <div>FACEBOOK: {props.profile.contacts.facebook}</div>
         <div>GITHUB: {props.profile.contacts.github}</div>
-        <div>TWITTE: {props.profile.contacts.twitter}</div>
+        <div>TWITTER: {props.profile.contacts.twitter}</div>
         <div>YOUTUBE: {props.profile.contacts.youtube}</div>
       </div>
     </div>

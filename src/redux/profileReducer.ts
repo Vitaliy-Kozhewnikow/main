@@ -1,13 +1,78 @@
 import {getProfileApi, getStatus as fetchStatus, savePhotoApi, updateStatus as updateStatusAPI} from "../api/api"
+import {Dispatch} from "redux";
 
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const UPDATE_INFO_PROFILE = 'UPDATE-INFO-PROFILE'
-const SET_STATUS = 'SET-STATUS'
-const DELETE_POST = 'DELETE-POST'
-const SAVE_PHOTO = 'SAVE-PHOTO'
+const PROFILE_ACTION_TYPES = {
+    ADD_POST: 'ADD-POST',
+    UPDATE_INFO_PROFILE: 'UPDATE-INFO-PROFILE',
+    SET_STATUS: 'SET-STATUS',
+    DELETE_POST: 'DELETE-POST',
+    SAVE_PHOTO: 'SAVE-PHOTO'
+} as const
 
-const firstState = {
+type ProfileActionTypes = typeof PROFILE_ACTION_TYPES[keyof typeof PROFILE_ACTION_TYPES]
+
+type postsDataTypes = {
+    id: number
+    text: string
+    likesCount: number
+}
+type PhotosType = {
+    small: string | null
+    large: string | null
+}
+type ContactsType = {
+    vk: string | null
+    facebook: string | null
+    github: string | null
+    twitter: string | null
+    youtube: string | null
+}
+
+type ProfileInfoType = {
+    id: number
+    photos: PhotosType
+    contacts: ContactsType
+} | null
+
+
+type addPostAction = {
+    type: typeof PROFILE_ACTION_TYPES.ADD_POST
+    text: string
+}
+type setProfileAction = {
+    type: typeof PROFILE_ACTION_TYPES.UPDATE_INFO_PROFILE
+    info: ProfileInfoType
+}
+type setStatusAction = {
+    type: typeof PROFILE_ACTION_TYPES.SET_STATUS
+    status: string
+}
+type deletePostAction = {
+    type: typeof PROFILE_ACTION_TYPES.DELETE_POST
+    id: number
+}
+type savePhotoAction = {
+    type: typeof PROFILE_ACTION_TYPES.SAVE_PHOTO
+    photos: PhotosType
+}
+type ProfileAction =
+    | addPostAction
+    | setProfileAction
+    | setStatusAction
+    | deletePostAction
+    | savePhotoAction
+
+
+
+
+type firstStateType = {
+    postsData: postsDataTypes[]
+    newPostText: string
+    info: ProfileInfoType
+    status: string
+}
+
+const firstState: firstStateType = {
     postsData: [
         { id: 1, text: 'Suck me Dick', likesCount: 123 },
         { id: 2, text: 'Suck me Di', likesCount: 1234 },
@@ -19,12 +84,12 @@ const firstState = {
     status: 'Введите ваш статус...'
 }
 
-const profileReducer = (state = firstState, action) => {
+const profileReducer = (state: firstStateType = firstState, action: ProfileAction) => {
     switch (action.type) {
-        case ADD_POST: {
+        case PROFILE_ACTION_TYPES.ADD_POST: {
             const newPost = {
                 id: state.postsData.length + 1,
-                text: action.posts,
+                text: action.text,
                 likesCount: 0
             };
             return {
@@ -35,30 +100,22 @@ const profileReducer = (state = firstState, action) => {
             }
         }
 
-        case UPDATE_NEW_POST_TEXT: {
-
-            return {
-                ...state,
-                newPostText: action.newText
-            }
-        }
-
-        case UPDATE_INFO_PROFILE: {
+        case PROFILE_ACTION_TYPES.UPDATE_INFO_PROFILE: {
             return { ...state, info: action.info }
         }
 
-        case SET_STATUS: {
+        case PROFILE_ACTION_TYPES.SET_STATUS: {
             if (action.status == null) {
                 return state
             } else {
             return { ...state, status: action.status }
             }
         }
-        case DELETE_POST: { 
+        case PROFILE_ACTION_TYPES.DELETE_POST: {
             return {...state, postsData: state.postsData.filter(p=> p.id !== action.id)}
         }
 
-        case SAVE_PHOTO: {
+        case PROFILE_ACTION_TYPES.SAVE_PHOTO: {
             debugger
             return {...state, info: {...state.info, photos: action.photos}}
         }
@@ -73,15 +130,15 @@ const profileReducer = (state = firstState, action) => {
 
 }
 
-export const addPostActionCreator = (posts) => ({ type: ADD_POST , posts })
+export const addPostActionCreator = (text: string) :addPostAction => ({ type: PROFILE_ACTION_TYPES.ADD_POST , text })
 
-export const setProfile = (profile) => ({ type: UPDATE_INFO_PROFILE, info: profile })
+export const setProfile = (profile: ProfileInfoType) : setProfileAction => ({ type: PROFILE_ACTION_TYPES.UPDATE_INFO_PROFILE, info: profile })
 
-export const setStatus = (status) => ({ type: SET_STATUS, status })
+export const setStatus = (status: string): setStatusAction => ({ type: PROFILE_ACTION_TYPES.SET_STATUS, status })
 
-export const deletePost = (id) => ({type: DELETE_POST, id})
+export const deletePost = (id:number) : deletePostAction => ({type: PROFILE_ACTION_TYPES.DELETE_POST, id})
 
-export const savePhotoAC = (photos) => ( {type:SAVE_PHOTO, photos})
+export const savePhotoAC = (photos: PhotosType) : savePhotoAction => ( {type: PROFILE_ACTION_TYPES.SAVE_PHOTO, photos})
 
 
 export default profileReducer;
@@ -89,7 +146,7 @@ export default profileReducer;
 
 export const getProfileInfo = (profileId) => {
 
-    return (dispatch) => {
+    return (dispatch: Dispatch<ProfileAction>) => {
         getProfileApi(profileId).then(response => {
             dispatch(setProfile(response))
         }
@@ -101,7 +158,7 @@ export const getProfileInfo = (profileId) => {
 
 export const getStatus = (profileId) => {
 
-    return async (dispatch) => {
+    return async (dispatch: Dispatch<ProfileAction>) => {
         try {
             fetchStatus(profileId).then(response => {
                 dispatch(setStatus(response))
@@ -121,7 +178,7 @@ export const getStatus = (profileId) => {
 
 
 export const updateStatus = (newStatus) => {
-    return async (dispatch) => {
+    return async (dispatch: Dispatch<ProfileAction>) => {
       try {
         const response = await updateStatusAPI(newStatus);
         console.log('Ответ сервера:', response); 
@@ -140,7 +197,7 @@ export const updateStatus = (newStatus) => {
 
 export const savePhoto = (file) => {
 
-    return async (dispatch) => {
+    return async (dispatch: Dispatch<ProfileAction>) => {
         try {
             const response = await savePhotoApi(file);
 

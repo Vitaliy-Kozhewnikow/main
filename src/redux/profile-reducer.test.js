@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals';
-import profileReducer, { addPostActionCreator, deletePost } from "./profileReducer.js";
+import profileReducer, { addPostActionCreator, deletePost } from "./profileReducer.ts";
 
 const state = {
     postsData: [

@@ -2,7 +2,6 @@ import React from 'react';
 import a from './userFollow.module.css';
 import userPhoto from '../../images/defaultAva.jpg'
 import { NavLink } from 'react-router-dom';
-import Pagindator from "../common/Pagindator";
 import Paginator from "../common/Pagindator";
 
 
