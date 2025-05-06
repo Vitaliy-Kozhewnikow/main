@@ -1,14 +1,51 @@
 import { AuthMe, profileResponce, logoutApi, loginApi } from "../api/api"
+import {Dispatch} from "redux";
+//ActionType
+const AUTH_REDUCER_ACTION_TYPE = {
+    SET_USER_DATA: 'SET-USER-DATA',
+    SET_USER_IMG: 'SET-USER-IMG',
+    DELETE_USER: 'DELETE-USER'
+} as const
 
-const SET_USER_DATA = 'SET-USER-DATA'
-const SET_USER_IMG = 'SET-USER-IMG'
-const DELETE_USER = 'DELETE-USER'
+type authReducerActionType = typeof AUTH_REDUCER_ACTION_TYPE[keyof typeof AUTH_REDUCER_ACTION_TYPE]
 
+//actionCreatorType
+type dataType = {
+    id: number
+    email: string | null
+    login: string | null
+}
 
+type setUserDataType = {
+    type: typeof AUTH_REDUCER_ACTION_TYPE.SET_USER_DATA
+    data: dataType
+}
 
-const firstState = {
+type setUserImgType = {
+    type: typeof AUTH_REDUCER_ACTION_TYPE.SET_USER_IMG
+    img : string | null
+}
+type deleteUserType = {
+    type: typeof AUTH_REDUCER_ACTION_TYPE.DELETE_USER
+}
 
-    id: null,
+type AuthActionType =
+    |setUserDataType
+    |setUserImgType
+    |deleteUserType
+
+//StateType
+type firstStateType = {
+     id: number
+     email: string | null
+     login: string | null
+     isAuth: boolean
+     img: string | null
+}
+
+const firstState: firstStateType = {
+
+    id: 0,
     email: null,
     login: null,
     isAuth: false,
@@ -16,10 +53,9 @@ const firstState = {
 
 }
 
-const authReducer = (state = firstState, action) => {
+const authReducer = (state: firstStateType = firstState, action:AuthActionType) => {
     switch (action.type) {
-        case SET_USER_DATA: {
-            debugger
+        case AUTH_REDUCER_ACTION_TYPE.SET_USER_DATA: {
             return {
 
                 ...state,
@@ -30,14 +66,14 @@ const authReducer = (state = firstState, action) => {
             }
 
         }
-        case SET_USER_IMG: {
+        case AUTH_REDUCER_ACTION_TYPE.SET_USER_IMG: {
             return {
                 ...state,
                 img: action.img
             }
         }
 
-        case DELETE_USER: { 
+        case AUTH_REDUCER_ACTION_TYPE.DELETE_USER: {
             return { 
                 ...state,
                 id: null,
@@ -56,17 +92,19 @@ const authReducer = (state = firstState, action) => {
 
 }
 
-export const setUserData = (data) => ({ type: SET_USER_DATA, data })
+export const setUserData = (data: dataType) : setUserDataType => ({ type: AUTH_REDUCER_ACTION_TYPE.SET_USER_DATA, data })
 
-export const setUserImg = (img) => ({ type: SET_USER_IMG, img })
+export const setUserImg = (img: string | null) : setUserImgType => ({ type: AUTH_REDUCER_ACTION_TYPE.SET_USER_IMG, img })
 
-export const deleteUser = () => ({type: DELETE_USER})
+export const deleteUser = (): deleteUserType=> ({type: AUTH_REDUCER_ACTION_TYPE.DELETE_USER})
 
 
 
 export const Auth = () => {
-    return async (dispatch) => {
-        const authResponse = await AuthMe()
+    return async (dispatch: Dispatch<AuthActionType>) => {
+
+        try {
+            const authResponse = await AuthMe()
 
         if (authResponse.resultCode === 0) {
             const userData = authResponse.data
@@ -77,13 +115,16 @@ export const Auth = () => {
 
             dispatch(setUserImg(profileResponse.photos.small))
         }
+        } catch (error) {
+            console.error('Ошибка получения данных пользователя', error)
+        }
 
     }
 
 }
 
 
-export const login = (email, password, rememberMe) => {
+export const login = (email : string, password: string, rememberMe : boolean = false) => {
     return async (dispatch) => {
         try {
 
@@ -105,7 +146,7 @@ export const login = (email, password, rememberMe) => {
 
 
 export const logout = () => {
-    return async (dispatch) => {
+    return async (dispatch: Dispatch<AuthActionType>) => {
         try {
 
             const response = await logoutApi()

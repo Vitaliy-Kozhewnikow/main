@@ -1,7 +1,9 @@
 
 const MESSAGE_ACTION_TYPE = {
     ADD_MESSAGE: 'ADD-MESSAGE'
-}
+} as const
+
+type messageActionType = typeof MESSAGE_ACTION_TYPE[keyof typeof MESSAGE_ACTION_TYPE]
 
 type messageDataType = {
     id: number
