@@ -28,7 +28,7 @@ type ContactsType = {
     youtube: string | null
 }
 
-type ProfileInfoType = {
+export type ProfileInfoType = {
     id: number
     photos: PhotosType
     contacts: ContactsType
